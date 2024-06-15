@@ -1,0 +1,113 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1.5;
+  background-color: #fdfff7;
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  max-width: 120rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 8rem 0;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.cta {
+  background-color: #59ffa0;
+  padding: 1rem 4rem;
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 2px;
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+}
+.nav .nav-content {
+  height: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 160rem;
+}
+.nav__logo {
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fdfff7;
+}
+.nav__logo span {
+  color: #59ffa0;
+}
+.nav .nav-links {
+  gap: 1.5rem;
+  font-size: 1.4rem;
+}
+.nav .nav-links__item a {
+  padding: 0.5rem 1rem;
+  color: #fdfff7;
+}
+.nav .nav-user-icons {
+  gap: 1rem;
+  font-size: 1.4rem;
+}
+.nav .nav-user-icons__item a {
+  padding: 0.5rem 1rem;
+  color: #fdfff7;
+}
+
+.header {
+  background-image: url("/img/header-bgc.jpg");
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+.header__title {
+  font-size: 6rem;
+  font-weight: bolder;
+  line-height: 1;
+  color: #fdfff7;
+  letter-spacing: -3px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}/*# sourceMappingURL=style.css.map */
