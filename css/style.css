@@ -22,6 +22,7 @@ button {
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -163,7 +164,7 @@ body {
 .products {
   margin-top: 8rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 4fr));
   gap: 3rem;
 }
 .products .product {
@@ -217,6 +218,10 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.banner-section {
+  padding: 4rem 0;
+}
+
 .banner {
   position: relative;
   background-image: url("/img/banner-bgc.jpg");
@@ -268,4 +273,74 @@ body {
   font-family: inherit;
   font-weight: 500;
   opacity: 0.4;
+}
+
+.reviews-container {
+  overflow: hidden;
+}
+
+.reviews {
+  margin-top: 8rem;
+  display: flex;
+  width: 240rem;
+  gap: 2rem;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+.reviews .review {
+  width: 40rem;
+  padding: 3rem 4rem;
+  border-radius: 2px;
+  box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.03);
+}
+.reviews .review__name {
+  position: relative;
+  font-size: 1.5rem;
+}
+.reviews .review__name::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -2rem;
+  height: 100%;
+  width: 2px;
+  background-color: #59ffa0;
+}
+.reviews .review__text {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+.reviews .review__top {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.reviews .review__bottom {
+  margin-top: 1rem;
+  padding: 1rem;
+}
+.reviews .review__img {
+  width: 6rem;
+  height: 6rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+.controls {
+  margin-top: 4rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.controls__review {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #e9e9e9;
+  transition: background-color 0.3s ease;
+}
+.controls__review--active {
+  background-color: #7189ff;
 }/*# sourceMappingURL=style.css.map */
