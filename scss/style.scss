@@ -4,7 +4,7 @@
 // GLOBAL
 
 .container {
-  max-width: 120rem;
+  max-width: 140rem;
   width: 100%;
   margin: 0 auto;
 }
@@ -21,6 +21,31 @@
   flex-direction: column;
 }
 
+.section-heading__subtitle,
+.section-heading__title,
+.section-heading-description {
+  text-align: center;
+  display: block;
+}
+
+.section-heading__subtitle {
+  color: $main-color;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1.2rem;
+}
+
+.section-heading__title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+.section-heading-description {
+  line-height: 1.6;
+  font-size: 1.3rem;
+  opacity: 0.6;
+}
+
 .cta {
   background-color: $main-color;
   padding: 1rem 4rem;
@@ -28,11 +53,27 @@
   font-size: 1.4rem;
   font-weight: 500;
   border-radius: 2px;
+  color: $bgc;
+}
+
+// TOPLAYER
+.toplayer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__text {
+    font-size: 1.2rem;
+    text-align: center;
+    span {
+      font-weight: bold;
+    }
+  }
 }
 
 // NAV
 .nav {
-  position: fixed;
+  position: absolute;
   width: 100%;
   .nav-content {
     height: 8rem;
@@ -44,6 +85,7 @@
   &__logo {
     font-size: 3rem;
     font-weight: bold;
+    font-family: "Koulen", sans-serif;
     text-transform: uppercase;
     color: $bgc;
     span {
@@ -58,6 +100,9 @@
       a {
         padding: 0.5rem 1rem;
         color: $bgc;
+      }
+      .nav-cta {
+        padding: 1rem 2rem;
       }
     }
   }
@@ -79,15 +124,127 @@
   height: 80vh;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   &__title {
-    font-size: 6rem;
-    font-weight: bolder;
-    line-height: 1;
+    font-family: "Koulen", sans-serif;
+    font-size: 6.4rem;
+    font-weight: bold;
+    line-height: 1.15;
     color: $bgc;
-    letter-spacing: -3px;
+    letter-spacing: -2px;
     text-transform: uppercase;
     margin-bottom: 2rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// PRODUCTS
+.products {
+  margin-top: 8rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  .product {
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .product__img {
+      box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.03);
+      position: relative;
+      height: 380px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .add-to-favourite {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: transparent;
+        .product__liked {
+          font-size: 2rem;
+          opacity: 0.6;
+          color: $main-color;
+        }
+        &:hover .product__liked {
+          color: red;
+        }
+      }
+    }
+    .product__content {
+      padding: 1rem;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .product__description {
+        .product__title {
+          font-size: 1.3rem;
+        }
+        .product__price {
+          font-size: 1.2rem;
+        }
+      }
+      .add-to-cart {
+        background-color: transparent;
+        padding: 0.5rem 1rem;
+        font-family: inherit;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+// BANNER
+.banner {
+  position: relative;
+  background-image: url("/img/banner-bgc.jpg");
+  padding: 14rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+  .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+  }
+  &__title {
+    font-size: 4.4rem;
+    color: $bgc;
+  }
+  &__text {
+    text-align: center;
+    font-size: 1.6rem;
+    color: $bgc;
+    opacity: 0.8;
+  }
+  &__form {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+  }
+  &__input {
+    padding: 1rem 2rem;
+    width: 25rem;
+    border: none;
+    border-radius: 2px;
+    &::placeholder {
+      font-family: inherit;
+      font-weight: 500;
+      opacity: 0.4;
+    }
   }
 }

@@ -31,7 +31,7 @@ body {
 }
 
 .container {
-  max-width: 120rem;
+  max-width: 140rem;
   width: 100%;
   margin: 0 auto;
 }
@@ -48,6 +48,32 @@ body {
   flex-direction: column;
 }
 
+.section-heading__subtitle,
+.section-heading__title,
+.section-heading-description {
+  text-align: center;
+  display: block;
+}
+
+.section-heading__subtitle {
+  color: #59ffa0;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1.2rem;
+}
+
+.section-heading__title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.section-heading-description {
+  line-height: 1.6;
+  font-size: 1.3rem;
+  opacity: 0.6;
+}
+
 .cta {
   background-color: #59ffa0;
   padding: 1rem 4rem;
@@ -55,10 +81,25 @@ body {
   font-size: 1.4rem;
   font-weight: 500;
   border-radius: 2px;
+  color: #fdfff7;
+}
+
+.toplayer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toplayer__text {
+  font-size: 1.2rem;
+  text-align: center;
+}
+.toplayer__text span {
+  font-weight: bold;
 }
 
 .nav {
-  position: fixed;
+  position: absolute;
   width: 100%;
 }
 .nav .nav-content {
@@ -71,6 +112,7 @@ body {
 .nav__logo {
   font-size: 3rem;
   font-weight: bold;
+  font-family: "Koulen", sans-serif;
   text-transform: uppercase;
   color: #fdfff7;
 }
@@ -84,6 +126,9 @@ body {
 .nav .nav-links__item a {
   padding: 0.5rem 1rem;
   color: #fdfff7;
+}
+.nav .nav-links__item .nav-cta {
+  padding: 1rem 2rem;
 }
 .nav .nav-user-icons {
   gap: 1rem;
@@ -99,15 +144,128 @@ body {
   height: 80vh;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
 }
 .header__title {
-  font-size: 6rem;
-  font-weight: bolder;
-  line-height: 1;
+  font-family: "Koulen", sans-serif;
+  font-size: 6.4rem;
+  font-weight: bold;
+  line-height: 1.15;
   color: #fdfff7;
-  letter-spacing: -3px;
+  letter-spacing: -2px;
   text-transform: uppercase;
   margin-bottom: 2rem;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.products {
+  margin-top: 8rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+.products .product {
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.products .product .product__img {
+  box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.03);
+  position: relative;
+  height: 380px;
+}
+.products .product .product__img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.products .product .product__img .add-to-favourite {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: transparent;
+}
+.products .product .product__img .add-to-favourite .product__liked {
+  font-size: 2rem;
+  opacity: 0.6;
+  color: #59ffa0;
+}
+.products .product .product__img .add-to-favourite:hover .product__liked {
+  color: red;
+}
+.products .product .product__content {
+  padding: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.products .product .product__content .product__description .product__title {
+  font-size: 1.3rem;
+}
+.products .product .product__content .product__description .product__price {
+  font-size: 1.2rem;
+}
+.products .product .product__content .add-to-cart {
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.banner {
+  position: relative;
+  background-image: url("/img/banner-bgc.jpg");
+  padding: 14rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+}
+.banner .shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+.banner__title {
+  font-size: 4.4rem;
+  color: #fdfff7;
+}
+.banner__text {
+  text-align: center;
+  font-size: 1.6rem;
+  color: #fdfff7;
+  opacity: 0.8;
+}
+.banner__form {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+.banner__input {
+  padding: 1rem 2rem;
+  width: 25rem;
+  border: none;
+  border-radius: 2px;
+}
+.banner__input::-moz-placeholder {
+  font-family: inherit;
+  font-weight: 500;
+  opacity: 0.4;
+}
+.banner__input::placeholder {
+  font-family: inherit;
+  font-weight: 500;
+  opacity: 0.4;
 }/*# sourceMappingURL=style.css.map */
