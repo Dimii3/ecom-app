@@ -20,6 +20,10 @@ button {
   cursor: pointer;
 }
 
+i {
+  pointer-events: none;
+}
+
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;

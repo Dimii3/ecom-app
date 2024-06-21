@@ -1,8 +1,18 @@
 import { products } from "./products.js";
 
-// REVIEWS CAROUSEL
-const favouritesProducts = [];
+// FAVS
+let favourtiesProductsQuantity = 0;
+const favsModal = document.querySelector(".favourite-products");
+const favsCloseBtn = document.querySelector(".favs-closeBtn");
+const toggleShowFavsBtn = document.querySelector(".favsToggleBtn");
+const quantityEl = document.querySelector(".favourite-products__quantity");
+const favouritesProductsContainer = document.querySelector(
+  ".favourite-products__list"
+);
+
+const productsElements = document.getElementsByClassName("product");
 const productsList = document.querySelector(".products");
+// REVIEWS CAROUSEL
 const controls = document.querySelector(".controls");
 const reviewsContainer = document.querySelector(".reviews");
 
@@ -52,4 +62,55 @@ const renderProducts = (data) => {
 
 renderProducts(products);
 
-const addToFavourites = (id) => {};
+[...productsElements].forEach((product) => {
+  product.addEventListener("click", (e) => {
+    const clickedEl = e.target;
+    if (!clickedEl.classList.contains("add-to-favourite")) {
+      return;
+    }
+    const currentProduct = clickedEl.closest(".product");
+    currentProduct.classList.toggle("liked");
+    const currentID = +currentProduct.id;
+    addToFavourites(currentID);
+  });
+});
+
+const renderFavouriteProducts = (favProducts) => {
+  favouritesProductsContainer.innerHTML = "";
+  favProducts.forEach((favProd) => {
+    const favProdEl = document.createElement("li");
+    favProdEl.id = favProd.id;
+    favProdEl.classList.add("favourite-products__item");
+    favProdEl.innerHTML = `<img
+                    src=${favProd.img}
+                    alt=""
+                    class="favourite-products__img"
+                  />
+                  <div class="favourite-products__content">
+                    <h4 class="favourite-products__product-name"
+                      >${favProd.productTitle}</h4
+                    >
+                    <p class="favourite-products__product-price">$ ${favProd.productPrice}</p>
+                  </div>
+               `;
+    favouritesProductsContainer.insertAdjacentElement("afterbegin", favProdEl);
+  });
+};
+let favouritesProducts = [];
+const addToFavourites = (id) => {
+  const foundEl = products.find((item) => item.id === id);
+  foundEl.liked = !foundEl.liked;
+  favouritesProducts = [...products.filter((prod) => prod.liked === true)];
+
+  favourtiesProductsQuantity = favouritesProducts.length;
+  quantityEl.textContent = `Quantity: ${favourtiesProductsQuantity}`;
+  renderFavouriteProducts(favouritesProducts);
+};
+
+favsCloseBtn.addEventListener("click", () => {
+  favsModal.classList.remove("show");
+});
+
+toggleShowFavsBtn.addEventListener("click", () => {
+  favsModal.classList.toggle("show");
+});
