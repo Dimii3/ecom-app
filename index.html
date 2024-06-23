@@ -55,35 +55,73 @@
             <button class="favsToggleBtn userBtn"
               ><i class="fa-regular fa-heart"></i
             ></button>
-            <div class="favourite-products">
-              <button class="favs-closeBtn"
+            <div class="favourite-products user-modal">
+              <button class="favs-closeBtn close-user-modal-btn"
                 ><i class="fa-solid fa-xmark"></i
               ></button>
-              <h3 class="favourite-products__title">Liked Products</h3>
-              <div class="favourite-products__stats">
-                <p class="favourite-products__quantity">Quantity: 0</p>
-              </div>
-              <ul class="favourite-products__list">
-                <!-- <li class="favourite-products__item">
+              <h3 class="favourite-products__title user-modal__title"
+                >Liked Products</h3
+              >
+              <p class="favourite-products__quantity user-modal__quantity"
+                >Quantity: 0</p
+              >
+              <ul class="favourite-products__list user-modal-list">
+                <!-- <li class="favourite-products__item user-modal-item">
+                  <button class="fav-deleteBtn user-modal-item__deleteBtn"
+                    ><i class="fa-solid fa-xmark"></i
+                  ></button>
                   <img
                     src="/img/pexels-mallonymedia-5413302.jpg"
                     alt=""
-                    class="favourite-products__img"
+                    class="favourite-products__img user-modal-item__img"
                   />
-                  <div class="favourite-products__content">
-                    <h4 class="favourite-products__product-name"
+                  <div class="favourite-products__content user-modal-item__content">
+                    <h4 class="favourite-products__product-name user-modal-item__product-name"
                       >Sneakers Nike Jordan One</h4
                     >
-                    <p class="favourite-products__product-price">$ 149.99</p>
+                    <p class="favourite-products__product-price user-modal-item__product-price">$ 149.99</p>
                   </div>
                 </li> -->
               </ul>
             </div>
           </li>
-          <li class="nav-user-icons__item">
-            <button class="favourite-products-toggleBtn userBtn"
+          <li class="nav-user-icons__item basket">
+            <button class="cart-products-btn userBtn"
               ><i class="fa-solid fa-basket-shopping"></i
             ></button>
+            <div class="cart user-modal">
+              <button class="cart-closeBtn close-user-modal-btn"
+                ><i class="fa-solid fa-xmark"></i
+              ></button>
+              <h3 class="cart__title user-modal__title">Your cart</h3>
+              <div class="cart-container">
+                <p class="cart__total-text">Total cost:</p>
+                <p class="cart__total-cost">$ 149.99</p>
+              </div>
+              <ul class="cart__list-items user-modal-list">
+                <li class="cart-item modal-item">
+                  <!-- <button
+                    class="cart-item__deleteBtn user-modal-item__deleteBtn"
+                    ><i class="fa-solid fa-xmark"></i
+                  ></button>
+                  <img
+                    src="/img/pexels-mallonymedia-5413302.jpg"
+                    alt=""
+                    class="cart-item__img user-modal-item__img"
+                  />
+                  <div class="cart-item__content user-modal-item__content">
+                    <h4
+                      class="cart-item__product-name user-modal-item__product-name"
+                      >Sneakers Nike Jordan One</h4
+                    >
+                    <p
+                      class="cart-item__product-price user-modal-item__product-price"
+                      >$ 149.99</p
+                    >
+                  </div> -->
+                </li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>

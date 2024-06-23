@@ -1,7 +1,6 @@
-import { products } from "./products.js";
+import { appState } from "./appState.js";
 
 // FAVS
-let favourtiesProductsQuantity = 0;
 const favsModal = document.querySelector(".favourite-products");
 const favsCloseBtn = document.querySelector(".favs-closeBtn");
 const toggleShowFavsBtn = document.querySelector(".favsToggleBtn");
@@ -11,7 +10,7 @@ const favouritesProductsContainer = document.querySelector(
 );
 
 const productsElements = document.getElementsByClassName("product");
-const productsList = document.querySelector(".products");
+const productsList = document.getElementsByClassName("products")[0];
 // REVIEWS CAROUSEL
 const controls = document.querySelector(".controls");
 const reviewsContainer = document.querySelector(".reviews");
@@ -32,10 +31,12 @@ controlsButtons.forEach((controlBtn, index) => {
   });
 });
 
-const renderProducts = (data) => {
+const renderProducts = (data = appState.products) => {
+  productsList.innerHTML = "";
   data.forEach((item) => {
     const productEl = document.createElement("div");
     productEl.classList.add("product");
+    item.liked && productEl.classList.add("liked");
     productEl.id = item.id;
     productEl.innerHTML = `
 <div class="product__img">
@@ -58,53 +59,130 @@ const renderProducts = (data) => {
 `;
     productsList.insertAdjacentElement("afterbegin", productEl);
   });
+
+  [...productsElements].forEach((product) => {
+    product.addEventListener("click", (e) => {
+      const clickedEl = e.target;
+      if (
+        !clickedEl.classList.contains("add-to-favourite") &&
+        !clickedEl.classList.contains("add-to-cart")
+      ) {
+        return;
+      } else if (clickedEl.classList.contains("add-to-favourite")) {
+        const currentProduct = clickedEl.closest(".product");
+        currentProduct.classList.toggle("liked");
+        const currentID = +currentProduct.id;
+        addToFavourites(currentID);
+      } else if (clickedEl.classList.contains("add-to-cart")) {
+        const currentProduct = clickedEl.closest(".product");
+        const currentID = +currentProduct.id;
+        addToCart(currentID);
+      }
+    });
+  });
 };
 
-renderProducts(products);
+// OGARNAC KOSZYK
 
-[...productsElements].forEach((product) => {
-  product.addEventListener("click", (e) => {
-    const clickedEl = e.target;
-    if (!clickedEl.classList.contains("add-to-favourite")) {
-      return;
-    }
-    const currentProduct = clickedEl.closest(".product");
-    currentProduct.classList.toggle("liked");
-    const currentID = +currentProduct.id;
-    addToFavourites(currentID);
-  });
+renderProducts(appState.products);
+
+const closeCartBtn = document.querySelector(".cart-closeBtn");
+const openCartBtn = document.querySelector(".cart-products-btn");
+const cart = document.querySelector(".cart");
+const cartItemsContainer = document.querySelector(".cart__list-items");
+
+openCartBtn.addEventListener("click", () => {
+  cart.classList.toggle("show");
 });
 
-const renderFavouriteProducts = (favProducts) => {
+closeCartBtn.addEventListener("click", () => {
+  cart.classList.remove("show");
+});
+
+const addToCart = (id) => {
+  const foundEl = appState.products.find((el) => el.id === id);
+  appState.cartProducts.push(foundEl);
+  renderCartItems();
+};
+
+const renderCartItems = () => {
+  appState.cartProducts.forEach((cartProduct) => {
+    const cartItemEl = document.createElement("li");
+    cartItemEl.setAttribute("id", cartProduct.id);
+    cartItemEl.classList.add("cart-item", "modal-item");
+    cartItemEl.innerHTML = `<button
+                    class="cart-item__deleteBtn user-modal-item__deleteBtn"
+                    ><i class="fa-solid fa-xmark"></i
+                  ></button>
+                  <img
+                    src=${cartProduct.img}
+                    alt=${cartProduct.productTitle}
+                    class="cart-item__img user-modal-item__img"
+                  />
+                  <div class="cart-item__content user-modal-item__content">
+                    <h4
+                      class="cart-item__product-name user-modal-item__product-name"
+                      >${cartProduct.productTitle}</h4
+                    >
+                    <p
+                      class="cart-item__product-price user-modal-item__product-price"
+                      >$ ${cartProduct.productPrice}</p
+                    >
+                  </div>`;
+    cartItemsContainer.insertAdjacentElement("afterbegin", cartItemEl);
+  });
+  console.log(appState.cartProducts);
+};
+
+const renderFavouriteProducts = (favProducts = appState.favProducts) => {
   favouritesProductsContainer.innerHTML = "";
   favProducts.forEach((favProd) => {
     const favProdEl = document.createElement("li");
-    favProdEl.id = favProd.id;
+    favProdEl.setAttribute("id", favProd.id);
     favProdEl.classList.add("favourite-products__item");
-    favProdEl.innerHTML = `<img
+    favProdEl.classList.add("modal-item");
+    favProdEl.innerHTML = `<button class="fav-deleteBtn user-modal-item__deleteBtn"
+                    ><i class="fa-solid fa-xmark"></i
+                  ></button><img
                     src=${favProd.img}
-                    alt=""
-                    class="favourite-products__img"
+                    alt=${favProd.productTitle}
+                    class="favourite-products__img  user-modal-item__img"
                   />
-                  <div class="favourite-products__content">
-                    <h4 class="favourite-products__product-name"
+                  <div class="favourite-products__content user-modal-item__content">
+                    <h4 class="favourite-products__product-name user-modal-item__product-name"
                       >${favProd.productTitle}</h4
                     >
-                    <p class="favourite-products__product-price">$ ${favProd.productPrice}</p>
+                    <p class="favourite-products__product-price user-modal-item__product-price">$ ${favProd.productPrice}</p>
                   </div>
                `;
     favouritesProductsContainer.insertAdjacentElement("afterbegin", favProdEl);
   });
+  quantityEl.textContent = `Quantity: ${appState.favProducts.length}`;
 };
-let favouritesProducts = [];
-const addToFavourites = (id) => {
-  const foundEl = products.find((item) => item.id === id);
-  foundEl.liked = !foundEl.liked;
-  favouritesProducts = [...products.filter((prod) => prod.liked === true)];
 
-  favourtiesProductsQuantity = favouritesProducts.length;
-  quantityEl.textContent = `Quantity: ${favourtiesProductsQuantity}`;
-  renderFavouriteProducts(favouritesProducts);
+favouritesProductsContainer.addEventListener("click", (e) => {
+  const clickedEl = e.target;
+  if (!clickedEl.classList.contains("fav-deleteBtn")) {
+    return;
+  }
+  const favProduct = clickedEl.closest(".favourite-products__item");
+  appState.favProducts = [
+    ...appState.favProducts.filter((i) => i.id !== +favProduct.id),
+  ];
+  const foundEl = appState.products.find((item) => item.id === +favProduct.id);
+  foundEl.liked = false;
+
+  renderFavouriteProducts();
+  renderProducts();
+});
+
+const addToFavourites = (id) => {
+  const foundEl = appState.products.find((item) => item.id === id);
+  foundEl.liked = !foundEl.liked;
+  appState.favProducts = [
+    ...appState.products.filter((prod) => prod.liked === true),
+  ];
+  renderFavouriteProducts(appState.favProducts);
 };
 
 favsCloseBtn.addEventListener("click", () => {
