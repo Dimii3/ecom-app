@@ -9,6 +9,9 @@ const favouritesProductsContainer = document.querySelector(
   ".favourite-products__list"
 );
 
+const cartProductsAmount = document.querySelector(".cart-amount");
+const favsProductsAmount = document.querySelector(".fav-amount");
+
 const productsElements = document.getElementsByClassName("product");
 const productsList = document.getElementsByClassName("products")[0];
 // REVIEWS CAROUSEL
@@ -106,6 +109,7 @@ const addToCart = (id) => {
 };
 
 const renderCartItems = () => {
+  cartItemsContainer.innerHTML = "";
   appState.cartProducts.forEach((cartProduct) => {
     const cartItemEl = document.createElement("li");
     cartItemEl.setAttribute("id", cartProduct.id);
@@ -157,6 +161,12 @@ const renderFavouriteProducts = (favProducts = appState.favProducts) => {
                `;
     favouritesProductsContainer.insertAdjacentElement("afterbegin", favProdEl);
   });
+  if (appState.favProducts.length !== 0) {
+    favsProductsAmount.textContent = `${appState.favProducts.length}`;
+    favsProductsAmount.classList.add("show");
+  } else {
+    favsProductsAmount.classList.remove("show");
+  }
   quantityEl.textContent = `Quantity: ${appState.favProducts.length}`;
 };
 
