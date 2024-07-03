@@ -11,6 +11,7 @@ const favouritesProductsContainer = document.querySelector(
 
 const cartProductsAmount = document.querySelector(".cart-amount");
 const favsProductsAmount = document.querySelector(".fav-amount");
+const cartTotalCost = document.querySelector(".cart__total-cost");
 
 const productsElements = document.getElementsByClassName("product");
 const productsList = document.getElementsByClassName("products")[0];
@@ -105,7 +106,14 @@ closeCartBtn.addEventListener("click", () => {
 const addToCart = (id) => {
   const foundEl = appState.products.find((el) => el.id === id);
   appState.cartProducts.push(foundEl);
+  if (appState.cartProducts.length !== 0) {
+    cartProductsAmount.textContent = `${appState.cartProducts.length}`;
+    cartProductsAmount.classList.add("show");
+  } else {
+    cartProductsAmount.classList.remove("show");
+  }
   renderCartItems();
+  updateCartData();
 };
 
 const renderCartItems = () => {
@@ -135,7 +143,6 @@ const renderCartItems = () => {
                   </div>`;
     cartItemsContainer.insertAdjacentElement("afterbegin", cartItemEl);
   });
-  console.log(appState.cartProducts);
 };
 
 const renderFavouriteProducts = (favProducts = appState.favProducts) => {
@@ -186,6 +193,27 @@ favouritesProductsContainer.addEventListener("click", (e) => {
   renderProducts();
 });
 
+cartItemsContainer.addEventListener("click", (e) => {
+  const clickedEl = e.target;
+  if (!clickedEl.classList.contains("cart-item__deleteBtn")) {
+    return;
+  }
+  const cartProduct = clickedEl.closest(".cart-item");
+  const currentID = +cartProduct.id;
+  appState.cartProducts = [
+    ...appState.cartProducts.filter((i) => i.id !== currentID),
+  ];
+
+  if (appState.cartProducts.length !== 0) {
+    cartProductsAmount.textContent = `${appState.cartProducts.length}`;
+    cartProductsAmount.classList.add("show");
+  } else {
+    cartProductsAmount.classList.remove("show");
+  }
+  updateCartData();
+  renderCartItems();
+});
+
 const addToFavourites = (id) => {
   const foundEl = appState.products.find((item) => item.id === id);
   foundEl.liked = !foundEl.liked;
@@ -202,3 +230,14 @@ favsCloseBtn.addEventListener("click", () => {
 toggleShowFavsBtn.addEventListener("click", () => {
   favsModal.classList.toggle("show");
 });
+
+const updateCartData = () => {
+  if (appState.cartProducts.length === 0) {
+    cartTotalCost.textContent = `$ 0.00`;
+    return;
+  }
+  const cartSum = appState.cartProducts.reduce((prevValue, currValue) => {
+    return { productPrice: prevValue.productPrice + currValue.productPrice };
+  });
+  cartTotalCost.textContent = `$ ${cartSum.productPrice}`;
+};
