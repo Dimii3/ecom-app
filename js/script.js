@@ -9,6 +9,11 @@ const favouritesProductsContainer = document.querySelector(
   ".favourite-products__list"
 );
 
+// ALERT INFO
+const alertModal = document.querySelector(".alert");
+const alertTitle = document.querySelector(".alert__title");
+const alertText = document.querySelector(".alert__text");
+
 const cartProductsAmount = document.querySelector(".cart-amount");
 const favsProductsAmount = document.querySelector(".fav-amount");
 const cartTotalCost = document.querySelector(".cart__total-cost");
@@ -76,10 +81,15 @@ const renderProducts = (data = appState.products) => {
         const currentProduct = clickedEl.closest(".product");
         currentProduct.classList.toggle("liked");
         const currentID = +currentProduct.id;
+        handleAlertInfo(
+          "Added to favourite",
+          "Check the list of favorite products"
+        );
         addToFavourites(currentID);
       } else if (clickedEl.classList.contains("add-to-cart")) {
         const currentProduct = clickedEl.closest(".product");
         const currentID = +currentProduct.id;
+        handleAlertInfo("Added to Cart", "Has been added to cart properly");
         addToCart(currentID);
       }
     });
@@ -188,7 +198,6 @@ favouritesProductsContainer.addEventListener("click", (e) => {
   ];
   const foundEl = appState.products.find((item) => item.id === +favProduct.id);
   foundEl.liked = false;
-
   renderFavouriteProducts();
   renderProducts();
 });
@@ -240,4 +249,15 @@ const updateCartData = () => {
     return { productPrice: prevValue.productPrice + currValue.productPrice };
   });
   cartTotalCost.textContent = `$ ${cartSum.productPrice}`;
+};
+
+// ALERT INFO
+
+const handleAlertInfo = (title, text) => {
+  alertTitle.textContent = `${title}`;
+  alertText.textContent = `${text}`;
+  alertModal.classList.add("show");
+  setTimeout(() => {
+    alertModal.classList.remove("show");
+  }, 3000);
 };
