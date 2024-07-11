@@ -24,6 +24,11 @@ const productsList = document.getElementsByClassName("products")[0];
 const controls = document.querySelector(".controls");
 const reviewsContainer = document.querySelector(".reviews");
 
+// NAV
+const navBtn = document.querySelector(".nav-btn");
+const nav = document.querySelector(".nav");
+const navLinks = document.querySelectorAll(".nav-links__item");
+
 //   CLEAR ACTIVE
 const clearActiveButtons = () => {
   controlsButtons.forEach((btn) =>
@@ -261,3 +266,15 @@ const handleAlertInfo = (title, text) => {
     alertModal.classList.remove("show");
   }, 3000);
 };
+
+const handleNav = () => {
+  if (nav.classList.contains("active")) {
+    nav.classList.remove("active");
+  } else {
+    nav.classList.add("active");
+  }
+};
+
+navLinks.forEach((link) => link.addEventListener("click", handleNav));
+
+navBtn.addEventListener("click", handleNav);
