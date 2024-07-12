@@ -270,8 +270,11 @@ const handleAlertInfo = (title, text) => {
 const handleNav = () => {
   if (nav.classList.contains("active")) {
     nav.classList.remove("active");
+    navBtn.classList.remove("active");
+    document.body;
   } else {
     nav.classList.add("active");
+    navBtn.classList.add("active");
   }
 };
 

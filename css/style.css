@@ -650,9 +650,10 @@ body {
   width: 4rem;
   height: 4rem;
   right: 2rem;
-  background: #fdfff7;
   z-index: 1000;
   padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   border-radius: 2px;
 }
 .nav-btn .bars {
@@ -660,23 +661,43 @@ body {
   width: 100%;
   height: 3px;
   border-radius: 1px;
-  background-color: #333;
+  background-color: #59ffa0;
 }
 .nav-btn .bars::before, .nav-btn .bars::after {
   position: absolute;
   content: "";
   top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 1px;
-  background-color: #333;
+  background-color: #59ffa0;
+  transition: width 0.3s ease 0.3s;
 }
 .nav-btn .bars::before {
+  left: 0;
+  width: 60%;
   transform: translateY(-8px);
 }
 .nav-btn .bars::after {
+  right: 0;
+  width: 60%;
   transform: translateY(8px);
+}
+
+.nav-btn:hover {
+  transform: rotate(90deg);
+}
+.nav-btn:hover .bars::before,
+.nav-btn:hover .bars::after {
+  width: 100%;
+}
+
+.nav-btn.active {
+  transform: rotate(90deg);
+}
+.nav-btn.active .bars::before,
+.nav-btn.active .bars::after {
+  width: 100%;
 }
 
 @media (max-width: 767px) {
@@ -687,18 +708,17 @@ body {
     position: fixed;
     top: 0;
     height: 100vh;
-    background-color: #fff;
     z-index: 999;
     transform: translateX(120%);
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s;
   }
   .nav.active {
     transform: translateX(0);
     opacity: 1;
   }
   .nav .nav-content {
-    background-color: rgba(29, 76, 36, 0.7882352941);
+    background-color: #25492a;
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -713,5 +733,43 @@ body {
   }
   .user-modal {
     left: -15rem;
+  }
+  .header .container {
+    text-align: center;
+  }
+  .section {
+    padding: 6rem 1.5rem;
+  }
+  .reviews {
+    width: 300rem;
+  }
+  .reviews .review {
+    width: 30rem;
+  }
+  .footer .footer__top {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .footer .footer__company-info,
+  .footer__col {
+    flex: 1;
+    min-width: 48%;
+    text-align: center;
+  }
+}
+@media (max-width: 576px) {
+  .banner {
+    padding: 14rem 2rem;
+    text-align: center;
+  }
+  .banner__title {
+    font-size: 3.4rem;
+  }
+  .banner__text {
+    font-size: 1.5rem;
+  }
+  .banner__form {
+    flex-direction: column;
   }
 }/*# sourceMappingURL=style.css.map */
