@@ -271,10 +271,11 @@ const handleNav = () => {
   if (nav.classList.contains("active")) {
     nav.classList.remove("active");
     navBtn.classList.remove("active");
-    document.body;
+    document.body.style.overflow = "scroll";
   } else {
     nav.classList.add("active");
     navBtn.classList.add("active");
+    document.body.style.overflow = "hidden";
   }
 };
 

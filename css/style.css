@@ -772,4 +772,18 @@ body {
   .banner__form {
     flex-direction: column;
   }
+  .basket,
+  .favs {
+    position: static;
+  }
+  .nav .nav-user-icons {
+    position: relative;
+  }
+  .user-modal {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .user-modal .user-modal-list {
+    max-height: 14rem;
+  }
 }/*# sourceMappingURL=style.css.map */
