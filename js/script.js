@@ -279,6 +279,12 @@ const handleNav = () => {
   }
 };
 
-navLinks.forEach((link) => link.addEventListener("click", handleNav));
+navLinks.forEach((link) =>
+  link.addEventListener("click", () => {
+    nav.classList.remove("active");
+    navBtn.classList.remove("active");
+    document.body.style.overflow = "scroll";
+  })
+);
 
 navBtn.addEventListener("click", handleNav);
